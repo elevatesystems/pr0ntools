@@ -32,9 +32,9 @@ class OptimizerLine(line.Line):
 	def key_variables(self):
 		return set()
 	def int_variables(self):
-		return set(['f', 'r', 'p', 'y', 'v', 'u'])
+		return set(['f', 'u'])
 	def float_variables(self):
-		return set(['a', 'b', 'c', 'g', 't', 'd', 'e'])
+		return set(['a', 'b', 'c', 'g', 't', 'd', 'e', 'v', 'r', 'p', 'y'])
 	def string_variables(self):
 		return set(['+', '-'])
 		
