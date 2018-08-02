@@ -210,8 +210,14 @@ class PanoCP:
         project.set_file_name(fn_obj.file_name)
 
         # Start with cpfind
-        args.append("--multirow")
+        args.append("--prealigned")
         args.append("--fullscale")
+        args.append("--minmatches")
+        args.append("1")
+        args.append("--ransacdist")
+        args.append("5")
+        args.append("--kdtreeseconddist")
+        args.append("0.5")
         # output file
         args.append("-o")
         args.append(project.file_name)
@@ -273,12 +279,31 @@ class PanoCP:
             print
             raise Exception('Bad rc: %d' % rc)
 
+        # Now run geocpset
+        args = list()
+        # output file
+        args.append("-o")
+        args.append(project.file_name)
+        # input file
+        args.append(project.file_name)
+
+        (rc, output) = exc_ret_istr('geocpset', args, print_out=self.print_output)
+        print 'PanoCP: geocpset done'
+        if not rc == 0:
+            print
+            print
+            print
+            print 'output:'
+            print output
+            print
+            raise Exception('Bad rc: %d' % rc)
+
 
         project.reopen()
         print 'Fixing image lines...'
         for il in project.image_lines:
             src = il.get_name()
-            dst = real_fn_base2full[src]
+            dst = real_fn_base2full[src.split('/')[-1]]
             print '  %s => %s' % (src, dst)
             il.set_name(dst)
 
