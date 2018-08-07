@@ -29,6 +29,7 @@ setup(name='pr0ntools',
 			'pr0ntools.tile',
 			],
 	scripts=[
+			'stitch/pr0ncp.py',
 			'stitch/pr0nhugin.py',
 			'stitch/pr0nmap.py',
 			'stitch/pr0npto.py',
